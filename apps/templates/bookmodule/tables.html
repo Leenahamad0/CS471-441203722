@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+<head>
+  <meta charset="UTF-8">
+  <title>Tables Example</title>
+  <link rel="stylesheet" href="{% static 'main.css' %}">
+</head>
+<body>
+
+  <!-- Table 1: simple table with thead, tbody and tfoot -->
+  <table border="1">
+    <caption>Table 1: Table of Fruits and Their Prices</caption>
+    <thead>
+      <tr>
+        <th>Fruit</th>
+        <th>Price</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Apple</td>
+        <td>$0.25</td>
+      </tr>
+      <tr>
+        <td>Orange</td>
+        <td>$0.50</td>
+      </tr>
+      <tr>
+        <td>Banana</td>
+        <td>$1.00</td>
+      </tr>
+      <tr>
+        <td>Pineapple</td>
+        <td>$2.00</td>
+      </tr>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td><b>Total</b></td>
+        <td><b>$3.75</b></td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <br><br>
+
+  <!-- Table 2: complex table with rowspan, colspan and an image -->
+  <table border="1">
+    <caption>Table 2: A more complex sample table</caption>
+    <thead>
+      <tr>
+        <th rowspan="4">
+          <img src="{% static 'desert.jpg' %}" alt="Desert Landscape" width="220" height="150">
+        </th>
+        <th colspan="4">
+          Camelid comparison<br>Approximate as of 6/2011
+        </th>
+      </tr>
+      <tr>
+        <th># of humps</th>
+        <th>Indigenous region</th>
+        <th>Spits?</th>
+        <th>Produces wool?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Dromedary</td>
+        <td>1</td>
+        <td>Arabian Peninsula</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Camels (bactrian)</td>
+        <td>2</td>
+        <td>Africa/Asia</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+      <tr>
+        <td>Llamas</td>
+        <td>1</td>
+        <td>Andes Mountains</td>
+        <td>Yes</td>
+        <td>Yes</td>
+      </tr>
+    </tbody>
+  </table>
+
+</body>
+</html>
