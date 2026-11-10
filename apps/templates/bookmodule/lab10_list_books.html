@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Lab 10 Part 2 - List Books</title>
+  <style>
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f2f2f2; }
+    .btn-add { background-color: #4CAF50; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+  <h1>Book Inventory (Django Forms)</h1>
+
+  <p>
+    <a href="{% url 'lab10_part2_add' %}" class="btn-add">Add New Book</a>
+  </p>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+    {% for book in books %}
+      <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>${{ book.price }}</td>
+        <td>{{ book.quantity }}</td>
+        <td>
+          <a href="{% url 'lab10_part2_edit' book.id %}">Edit</a> |
+          <a href="{% url 'lab10_part2_delete' book.id %}" style="color: red;" onclick="return confirm('Are you sure?');">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="5">No books found.</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>

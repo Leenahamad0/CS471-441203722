@@ -1,34 +1,60 @@
-{% extends "layouts/base.html" %}
-{% load static %}
-{% block title %} List of Books {% endblock title %}
-{% block stylesheets %}
-  <style>
-    h1{
-      color: green;
-    }
-
-    h2{
-      color: lightskyblue;
-    }
-
-    p {
-      font-family: verdana;
-      font-size: 20px;
-    }
+<!DOCTYPE html>
+<html lang="en">
+{% load static %} <!-- load static -->
+<head>
+  <title>List of Books</title>
+  <meta name="keywords" content="Books, recent, Learning, library">
+  <meta name="description" content="Books website">
+  <meta name="author" content="author name">
+  <meta charset="UTF-8">
+  <link rel="icon" href="{% static 'qu-icon.png' %}"> <!-- static template tag -->
+  <link rel="stylesheet" href="{% static 'styles.css' %}"> <!-- static template tag -->
+  <style> /* add internal css */
+    h1 { color: green; }
+    h2 { color: lightskyblue; }
+    p { font-family: verdana; font-size: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #ddd; padding: 10px; text-align: left; }
+    th { background-color: #f2f2f2; }
   </style>
-{% endblock stylesheets %}
-{% block content %}
+</head>
+<body>
+  <div class="topnav">
+    <a href="{% url 'books.index' %}">Home</a> <!-- URL template tag -->
+    <a class="active" href="{% url 'lab10_part1_list' %}">List Books</a> <!-- URL template tag -->
+    <a href="{% url 'books.aboutus' %}">About</a> <!-- URL template tag -->
+  </div>
+
   <h1>List of Books</h1>
-  <a href="{% url 'books.view_one_book' 1 %}"><h2>Internet & World Wide Web How to Program</h2>
-  </a>
-  <a href="{% url 'books.view_one_book' 1 %}">
-    <img src="{% static 'book1.jpg' %}" alt="Book1 img desc" width="200" height="200">
-  </a>
-  <hr>
-  <h2>2) C++ How to Program, Late Objects Version</h2>
-  <img src="{% static 'book2.jpg' %}" alt="Book2 img desc" width="200" height="200">
-  <hr>
-  <h3>3) Images in Another Folder</h3>
-  <img src="{% static 'book3.jpg' %}" alt="Book3 img desc" width="200" height="200">
-  <hr>
-{% endblock content %}
+
+  <p> <!-- Link to add a new book (Task 2) -->
+    <a href="{% url 'lab10_part1_add' %}" class="btn-add">Add New Book</a>
+  </p>
+
+  <table>
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Price</th>
+      <th>Quantity</th>
+      <th>Actions</th>
+    </tr>
+    {% for book in books %}
+      <tr>
+        <td>{{ book.id }}</td>
+        <td>{{ book.title }}</td>
+        <td>${{ book.price }}</td>
+        <td>{{ book.quantity }}</td>
+        <td> <!-- Edit and Delete buttons carrying the book's ID (Tasks 3 & 4) -->
+          <a href="{% url 'lab10_part1_edit' book.id %}" class="btn-edit">Edit</a> |
+          <a href="{% url 'lab10_part1_delete' book.id %}" class="btn-delete" onclick="return confirm('Are you sure you want to delete this book?');">Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="5">No books found in the database.</td>
+      </tr>
+    {% endfor %}
+  </table>
+</body>
+</html>
