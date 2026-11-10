@@ -47,3 +47,28 @@ class Student(models.Model):  # Lab 8 - Task 6
 
     def __str__(self):
         return self.name
+
+
+class Address2(models.Model):  # Lab 11 - Task 2
+    city = models.CharField(max_length=50)
+
+    def __str__(self):
+        return self.city
+
+
+class Student2(models.Model):  # Lab 11 - Task 2
+    name = models.CharField(max_length=100)
+    age = models.IntegerField()
+    addresses = models.ManyToManyField(Address2)  # Many-to-Many relationship
+
+    def __str__(self):
+        return self.name
+
+
+class StudentCard(models.Model):  # Lab 11 - Task 3
+    name = models.CharField(max_length=100)
+    university_id = models.CharField(max_length=20)
+    photo = models.ImageField(upload_to='student_photos/')
+
+    def __str__(self):
+        return self.name

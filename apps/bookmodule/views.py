@@ -5,7 +5,12 @@ from django.db.models import Count, Sum, Avg, Max, Min  # Lab 8 - Task 5
 from .models import Book  # Lab 7
 from .models import Student, Address  # Lab 8 - Task 7
 from .models import Publisher  # Lab 9
+from .models import Student2  # Lab 11 - Task 2
+from .models import StudentCard  # Lab 11 - Task 3
 from .forms import BookForm  # Lab 10 - Part 2
+from .forms import StudentForm  # Lab 11
+from .forms import Student2Form  # Lab 11 - Task 2
+from .forms import StudentCardForm  # Lab 11 - Task 3
 
 
 def index(request):
@@ -242,3 +247,107 @@ def lab10_part2_delete_book(request, book_id):  # Lab 10 - Part 2
     book = get_object_or_404(Book, id=book_id)
     book.delete()
     return redirect('lab10_part2_list')
+
+
+def student_list(request):  # Lab 11 - Task 1
+    students = Student.objects.all()
+    return render(request, 'bookmodule/student_list.html', {'students': students})
+
+
+def student_add(request):  # Lab 11 - Task 1
+    if request.method == 'POST':
+        form = StudentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm()
+    return render(request, 'bookmodule/student_add.html', {'form': form})
+
+
+def student_edit(request, student_id):  # Lab 11 - Task 1
+    student = get_object_or_404(Student, id=student_id)
+    if request.method == 'POST':
+        form = StudentForm(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student_list')
+    else:
+        form = StudentForm(instance=student)
+    return render(request, 'bookmodule/student_edit.html', {'form': form, 'student': student})
+
+
+def student_delete(request, student_id):  # Lab 11 - Task 1
+    student = get_object_or_404(Student, id=student_id)
+    student.delete()
+    return redirect('student_list')
+
+
+def student2_list(request):  # Lab 11 - Task 2
+    students = Student2.objects.all()
+    return render(request, 'bookmodule/student2_list.html', {'students': students})
+
+
+def student2_add(request):  # Lab 11 - Task 2
+    if request.method == 'POST':
+        form = Student2Form(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('student2_list')
+    else:
+        form = Student2Form()
+    return render(request, 'bookmodule/student2_add.html', {'form': form})
+
+
+def student2_edit(request, student_id):  # Lab 11 - Task 2
+    student = get_object_or_404(Student2, id=student_id)
+    if request.method == 'POST':
+        form = Student2Form(request.POST, instance=student)
+        if form.is_valid():
+            form.save()
+            return redirect('student2_list')
+    else:
+        form = Student2Form(instance=student)
+    return render(request, 'bookmodule/student2_edit.html', {'form': form, 'student': student})
+
+
+def student2_delete(request, student_id):  # Lab 11 - Task 2
+    student = get_object_or_404(Student2, id=student_id)
+    student.delete()
+    return redirect('student2_list')
+
+
+def card_list(request):  # Lab 11 - Task 3
+    cards = StudentCard.objects.all()
+    return render(request, 'bookmodule/card_list.html', {'cards': cards})
+
+
+def card_add(request):  # Lab 11 - Task 3
+    if request.method == 'POST':
+        # request.FILES carries the uploaded image
+        form = StudentCardForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('card_list')
+    else:
+        form = StudentCardForm()
+    return render(request, 'bookmodule/card_add.html', {'form': form})
+
+
+def card_edit(request, card_id):  # Lab 11 - Task 3
+    card = get_object_or_404(StudentCard, id=card_id)
+    if request.method == 'POST':
+        form = StudentCardForm(request.POST, request.FILES, instance=card)
+        if form.is_valid():
+            form.save()
+            return redirect('card_list')
+    else:
+        form = StudentCardForm(instance=card)
+    return render(request, 'bookmodule/card_edit.html', {'form': form, 'card': card})
+
+
+def card_delete(request, card_id):  # Lab 11 - Task 3
+    card = get_object_or_404(StudentCard, id=card_id)
+    card.photo.delete(save=False)  # Remove the image file from the media folder
+    card.delete()
+    return redirect('card_list')

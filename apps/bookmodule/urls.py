@@ -33,4 +33,16 @@ urlpatterns = [
     path("lab10_part2/addbook", views.lab10_part2_add_book, name="lab10_part2_add"),  # Lab 10 - Part 2
     path("lab10_part2/editbook/<int:book_id>", views.lab10_part2_edit_book, name="lab10_part2_edit"),  # Lab 10 - Part 2
     path("lab10_part2/deletebook/<int:book_id>", views.lab10_part2_delete_book, name="lab10_part2_delete"),  # Lab 10 - Part 2
+    path("students/list", views.student_list, name="student_list"),  # Lab 11 - Task 1
+    path("students/add", views.student_add, name="student_add"),  # Lab 11 - Task 1
+    path("students/edit/<int:student_id>", views.student_edit, name="student_edit"),  # Lab 11 - Task 1
+    path("students/delete/<int:student_id>", views.student_delete, name="student_delete"),  # Lab 11 - Task 1
+    path("students2/list", views.student2_list, name="student2_list"),  # Lab 11 - Task 2
+    path("students2/add", views.student2_add, name="student2_add"),  # Lab 11 - Task 2
+    path("students2/edit/<int:student_id>", views.student2_edit, name="student2_edit"),  # Lab 11 - Task 2
+    path("students2/delete/<int:student_id>", views.student2_delete, name="student2_delete"),  # Lab 11 - Task 2
+    path("cards/list", views.card_list, name="card_list"),  # Lab 11 - Task 3
+    path("cards/add", views.card_add, name="card_add"),  # Lab 11 - Task 3
+    path("cards/edit/<int:card_id>", views.card_edit, name="card_edit"),  # Lab 11 - Task 3
+    path("cards/delete/<int:card_id>", views.card_delete, name="card_delete"),  # Lab 11 - Task 3
 ]
